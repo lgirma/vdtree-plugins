@@ -19,7 +19,7 @@ You can use the abstract DOM in a svelte component using `SvelteWrapper` import
     import SvelteWrapper from 'vdtree-svelte'
     import {h} from 'vdtree'
 
-    let myDom = h('div', {}, 'Content')
+    let myDom = h('div', {}, 'Hello, World!')
 </script>
 
 <SvelteWrapper dom={myDom}/>
@@ -30,6 +30,9 @@ A simple counter example:
 
 ```jsx
 // CounterInfo.jsx
+/** @jsx h */
+import {h} from 'vdtree'
+
 const AbstractCounterInfo = ({c = 1}) => <div>{c}</div>
 
 // Counter.svelte
@@ -51,4 +54,4 @@ const MyComp = <button onclick={e => alert('Clicked!')}>Click Me</button>
 <SvelteWrapper dom={MyComp}/>
 ```
 
-**Note**: The `SvelteWrapper` will always create a top-level `<div>` tag.
+**Note**: The `SvelteWrapper` component will always create a top-level `<div>` tag.
