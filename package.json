@@ -1,6 +1,12 @@
 {
-  "version": "0.0.0",
-  "type": "module",
+  "name": "vdtree-svelte",
+  "version": "0.2.0",
+  "author": "Leone",
+  "repository": "https://github.com/lgirma/vdtree-svelte",
+  "homepage": "https://github.com/lgirma/vdtree-svelte",
+  "license": "ISC",
+  "description": "Svelte wrapper component for vdtree abstract components",
+  "svelte": "src/index.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,7 +17,17 @@
     "svelte": "^3.37.0",
     "vite": "^2.3.8"
   },
-  "dependencies": {
+  "keywords": [
+    "svelte",
+    "vdtree"
+  ],
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "peerDependencies": {
     "boost-web-core": "^1.13.0",
     "vdtree": "^0.6.0"
   }
