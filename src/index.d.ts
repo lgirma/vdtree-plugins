@@ -3,7 +3,7 @@ import { SvelteComponentTyped } from "svelte"
 import type { AbstractDomNode } from "vdtree";
 
 export interface SvelteWrapperProps {
-    dom: AbstractDomNode
+    dom: AbstractDomNode|Function
     props: any
 }
 
