@@ -1,6 +1,7 @@
 <script lang="ts">
     //import {AbstractDomElement} from "./AbstractDOM";
-    import {h, renderToDom} from 'vdtree'
+    import {h,} from 'vdtree'
+    import {renderToDom} from "vdtree-dom";
     import {isFunc} from "boost-web-core";
     import { onMount } from 'svelte';
 

@@ -1,6 +1,6 @@
 {
   "name": "vdtree-svelte",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "author": "Leone",
   "repository": "https://github.com/lgirma/vdtree-plugins",
   "homepage": "https://github.com/lgirma/vdtree-plugins/tree/master/svelte",
@@ -16,6 +16,7 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
     "svelte": "^3.37.0",
+    "vdtree-examples": "^0.3.0",
     "vite": "^2.3.8"
   },
   "keywords": [
@@ -30,6 +31,7 @@
   ],
   "peerDependencies": {
     "boost-web-core": "^1.13.0",
-    "vdtree": "^0.6.0"
+    "vdtree": "^0.8.0",
+    "vdtree-dom": "^0.1.0"
   }
 }
