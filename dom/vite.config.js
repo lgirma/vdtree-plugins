@@ -6,7 +6,7 @@ export default defineConfig({
     build: {
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
-            name: 'vdtree-ssr'
+            name: 'vdtree-dom'
         },
         minify: false,
         rollupOptions: {

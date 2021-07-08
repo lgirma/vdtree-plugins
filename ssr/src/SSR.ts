@@ -1,5 +1,4 @@
-import {AbstractDomElement, AbstractDomNode, AbstractFuncComponent, h} from "vdtree";
-import {BOOL_ATTRS, VOID_ELEMENTS} from "vdtree";
+import {AbstractDomElement, AbstractDomNode, AbstractFuncComponent, h, BOOL_ATTRS, VOID_ELEMENTS} from "vdtree";
 import {camelToKebabCase, isFunc, OneOrMany, parseBindingExpression, toArray} from "boost-web-core";
 import {
     AbstractDomNodeWithState,
