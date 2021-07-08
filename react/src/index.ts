@@ -1,1 +1,2 @@
-export * from './ReactWrapper'
+import {ReactWrapper} from "./ReactWrapper";
+export default ReactWrapper;

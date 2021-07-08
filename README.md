@@ -2,7 +2,7 @@
 
 Various plugins for [vdtree](https://github.com/lgirma/vdtree) library.
 
-| Plugin | Package | Description |
+| Plugin | npm Package | Description |
 | ----------- | ----------- | ----------- |
 | [React](react) | `vdtree-react` | React wrapper |
 | [Svelte](svelte) | `vdtree-svelte` | Svelte wrapper |

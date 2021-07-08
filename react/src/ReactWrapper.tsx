@@ -4,32 +4,40 @@ import {
 import {isFunc, OneOrMany, toArray} from "boost-web-core";
 import {htmlAttrsToReactAttrs} from "./Utils";
 import {ReactHooksState} from "./ReactHooksState";
-import {ReactElement} from "react";
+import {ReactElement, createElement, Fragment, useState, Component, FC} from "react";
 
-export function toReactComponent<TElement = ReactElement, TProps = any>(item: AbstractDomNode, React: any): (props: TProps) => TElement {
-    const {createElement, Fragment} = React
+export interface ReactWrapperProps<TProps = any> {
+    dom: AbstractDomNode|((p: TProps) => AbstractDomNode)
+    props?: TProps
+}
+
+export function ReactWrapper<TProps = {}>({dom, props}: ReactWrapperProps<TProps>) {
+    const Comp = toReactComponent<TProps>(dom as any)
+    return createElement(Comp, props)
+}
+
+export function toReactComponent<TProps = any>(item: AbstractDomNode): FC<TProps> {
 
     if (typeof item == 'string' || typeof item == 'number' || typeof item == 'boolean' || typeof item == 'bigint') {
         return () => createElement('span', null, item)
     }
     else if (item instanceof AbstractDomNodeWithState) {
-        return toStatefulComponent(item, React)
+        return toStatefulComponent(item)
     }
     else if (item.tag instanceof AbstractDomNodeWithState) {
-        return toStatefulComponent(item.tag, React)
+        return toStatefulComponent(item.tag)
     }
     else if (isFunc(item)) {
         // AFC
-        return (props) => toReactElement((item as any)(props), React)
+        return (props) => toReactElement((item as any)(props))
     }
     else {
-        return () => toReactElement(item, React)
+        return () => toReactElement(item)
     }
 }
 
-export function toReactElement<TElement = ReactElement>(root: OneOrMany<AbstractDomNode>, React: any): TElement {
-    const {Fragment, createElement} = React
-    let result = toReactElements(root, React)
+export function toReactElement(root: OneOrMany<AbstractDomNode>): ReactElement {
+    let result = toReactElements(root)
     if (result.length > 1)
         return createElement(Fragment, null, ...result)
     else if (result.length == 1)
@@ -38,18 +46,16 @@ export function toReactElement<TElement = ReactElement>(root: OneOrMany<Abstract
     return createElement('span')
 }
 
-function toStatefulComponent<TElement = ReactElement>(comp: AbstractDomNodeWithState, React: any) {
-    const {useState} = React
+function toStatefulComponent(comp: AbstractDomNodeWithState) {
     return function (props) {
         const hook = useState(comp.basedOn)
         const stateWrapper = new ReactHooksState(hook)
         let virDomTree = comp.stateMapping(stateWrapper)
-        return toReactElement<TElement>(virDomTree, React)
+        return toReactElement(virDomTree)
     }
 }
 
-export function toReactElements<TElement = ReactElement>(root: OneOrMany<AbstractDomNode>, React: any): TElement[] {
-    const {createElement} = React
+export function toReactElements(root: OneOrMany<AbstractDomNode>): ReactElement[] {
     let reactElements: any[] = []
     let roots = toArray(root)
 
@@ -58,26 +64,26 @@ export function toReactElements<TElement = ReactElement>(root: OneOrMany<Abstrac
             reactElements.push(item)
         }
         else if (item instanceof AbstractDomNodeWithState) {
-            reactElements.push(createElement(toStatefulComponent(item, React)))
+            reactElements.push(createElement(toStatefulComponent(item)))
         }
         else if (item.tag instanceof AbstractDomNodeWithState) {
-            reactElements.push(createElement(toStatefulComponent(item.tag, React), item.props, item.children))
+            reactElements.push(createElement(toStatefulComponent(item.tag), item.props, item.children))
         }
         else if (isFunc(item.tag)) {
             let rendered = (item.tag as any)(item.props ?? {})
             if (rendered.type === undefined)
-                reactElements.push(toReactElements(rendered, React))
+                reactElements.push(toReactElements(rendered))
             else
                 reactElements.push(createElement(item.tag, item.props, item.children))
         }
-        else if (item.tag?.prototype instanceof React.Component) {
+        else if (item.tag?.prototype instanceof Component) {
             reactElements.push(createElement(item.tag, item.props, item.children))
         }
         else if (typeof item.tag == 'string') {
             let reactAttrs = htmlAttrsToReactAttrs({...item.props})
             let elt = item.tag == 'textarea'
                 ? createElement(item.tag, {...reactAttrs, defaultValue: item.children})
-                : createElement(item.tag, reactAttrs, ...toReactElements(item.children, React))
+                : createElement(item.tag, reactAttrs, ...toReactElements(item.children))
             reactElements.push(elt)
         }
         else {

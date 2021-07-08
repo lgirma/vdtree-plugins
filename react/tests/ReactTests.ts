@@ -23,7 +23,7 @@ describe('React Tests', () => {
             'child-3'
         )
 
-        let jsxElt = toReactElement(abstractTree, React)
+        let jsxElt = toReactElement(abstractTree)
         expect(jsxElt.type).to.equal('div')
         expect(jsxElt.props.children.length).to.equal(3)
         expect(jsxElt.props.children[0]).to.equal('child-1')
@@ -36,8 +36,8 @@ describe('React Tests', () => {
         let divWithJSStyle = h('div', {style: {color:'red', borderColor: 'red', MsTransform: 'rotate(10deg)'}})
         let divWithStringStyle = h('div', {style: 'color:red; border-color:red; -ms-transform: rotate(10deg);'})
 
-        let jsxJs = toReactElement(divWithJSStyle, React)
-        let jsxString = toReactElement(divWithStringStyle, React)
+        let jsxJs = toReactElement(divWithJSStyle)
+        let jsxString = toReactElement(divWithStringStyle)
 
         expect(jsxJs.props.style.color).to.equal('red')
         expect(jsxJs.props.style.borderColor).to.equal('red')
@@ -51,7 +51,7 @@ describe('React Tests', () => {
         let lazyComponent = ({name = ''}) => h('div', {}, `Hello, ${name}`)
         let abstractTree = h('div', {}, h(lazyComponent, {name: 'React'}))
 
-        let jsxElt = toReactElement(abstractTree, React)
+        let jsxElt = toReactElement(abstractTree)
         expect(jsxElt.type).to.equal('div')
         expect(jsxElt.props.children[0].type).to.equal('div')
         expect(jsxElt.props.children[0].props.children).to.equal('Hello, React')
@@ -63,7 +63,7 @@ describe('React Tests', () => {
             h(reactFC, {name: 'React'})
         )
 
-        let jsxElt = toReactElement(root, React)
+        let jsxElt = toReactElement(root)
         expect(jsxElt.type).to.equal('div')
         expect(typeof jsxElt.props.children.type).to.equal('function')
         expect(jsxElt.props.children.props.name).to.equal('React')
@@ -75,7 +75,7 @@ describe('React Tests', () => {
             h('div', {}, 'child-2')
         ]
 
-        let jsxElt = toReactElement(abstractTree, React)
+        let jsxElt = toReactElement(abstractTree)
         expect(jsxElt.type).to.equal(React.Fragment)
         expect(jsxElt.props.children.length).to.equal(2)
         expect(jsxElt.props.children[0].props.children).to.equal('child-1')
@@ -87,7 +87,7 @@ describe('React Tests', () => {
             h('span', {id: 'counter-info'}, count.get().toString()),
             h('button', {onclick: e => count.update(c => c + 1), id: 'btn-inc'}, '+')
         ))
-        let ReactComp = toReactComponent(abstractTree as any, React)
+        let ReactComp = toReactComponent(abstractTree as any)
         ReactDOM.render(React.createElement(ReactComp), document.getElementById('root')!)
 
         let btn = document.getElementById('btn-inc')!
@@ -104,7 +104,7 @@ describe('React Tests', () => {
             h('input', {value: name.bind(), id: 'input-name'}),
             h('button', {onclick: e => name.set('Hello'), id: 'btn-greet'}, '+')
         ))
-        let ReactComp = toReactComponent(abstractTree as any, React)
+        let ReactComp = toReactComponent(abstractTree as any)
         ReactDOM.render(React.createElement(ReactComp), document.getElementById('root')!)
 
         let btn = document.getElementById('btn-greet')!
@@ -120,7 +120,7 @@ describe('React Tests', () => {
             h('button', {onclick: e => contact.update(c => ({...c, name: {first: 'John'}})), id: 'btn-set-name'}, '+'),
             h('div', {id: 'panel-name'}, contact.get().name.first)
         ))
-        let ReactComp = toReactComponent(abstractTree as any, React)
+        let ReactComp = toReactComponent(abstractTree as any)
         ReactDOM.render(React.createElement(ReactComp), document.getElementById('root')!)
 
         let btn = document.getElementById('btn-set-name')!

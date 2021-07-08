@@ -1,10 +1,8 @@
-import {toReactComponent} from "./ReactWrapper";
+import {ReactWrapper} from "./ReactWrapper";
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import {
-    SamplesPage
-} from "vdtree-examples";
+import {SamplesPage} from "vdtree-examples";
 
-let DemoPage = toReactComponent<React.ReactElement>(SamplesPage as any, React)
+const DemoPage = () => <ReactWrapper dom={SamplesPage} />
 
 ReactDOM.render(<DemoPage />, document.getElementById('root')!)

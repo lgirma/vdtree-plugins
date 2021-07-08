@@ -1,6 +1,6 @@
 {
   "name": "vdtree-examples",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Leone",
   "repository": "https://github.com/lgirma/vdtree-plugins",
   "homepage": "https://github.com/lgirma/vdtree-plugins/tree/master/examples",
@@ -8,15 +8,14 @@
   "description": "Sample abstract vdtree components",
   "module": "dist/vdtree-examples.es.js",
   "main": "dist/vdtree-examples.umd.js",
-  "types": "dist/index.d.ts",
+  "types": "src/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc",
+    "build": "vite build",
     "serve": "vite preview"
   },
   "devDependencies": {
     "@types/node": "^16.0.1",
-    "typescript": "^4.3.5",
     "vite": "^2.4.0"
   },
   "peerDependencies": {
@@ -26,6 +25,7 @@
     "vdtree"
   ],
   "files": [
+    "src/index.d.ts",
     "dist",
     "README.md",
     "LICENSE",

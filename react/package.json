@@ -1,6 +1,6 @@
 {
   "name": "vdtree-react",
-  "version": "0.4.0",
+  "version": "0.1.0",
   "author": "Leone",
   "repository": "https://github.com/lgirma/vdtree-plugins",
   "homepage": "https://github.com/lgirma/vdtree-plugins/tree/master/react",
@@ -34,7 +34,7 @@
   "peerDependencies": {
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "vdtree": "^0.6.0"
+    "vdtree": "^0.7.0"
   },
   "keywords": [
     "react",
@@ -45,5 +45,8 @@
     "README.md",
     "LICENSE",
     "package.json"
-  ]
+  ],
+  "dependencies": {
+    "vdtree-examples": "^0.2.0"
+  }
 }
