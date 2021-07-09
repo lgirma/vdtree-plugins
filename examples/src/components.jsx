@@ -11,7 +11,7 @@ export const AbstractRating = ({maxVal = 5}) => withState(0, rating =>
             .star:hover {font-weight: bold}
         `}</style>
         {new Array(maxVal).fill(0).map((v, i) =>
-            <span class="star" onclick={() => rating.set(i+1)}>
+            <span class="star" onClick={() => rating.set(i+1)}>
                 {rating.get() > i ? '★' : '☆'}
             </span>)}
     </div>
@@ -20,18 +20,18 @@ export const AbstractRating = ({maxVal = 5}) => withState(0, rating =>
 export const AbstractCounter = withState(0,count =>
     <div>
         <div>{count.get()}</div>
-        <button onclick={e => count.update(c => c + 1)}>+</button>
-        <button onClick={e => count.update(c => c - 1)}>-</button>
-        <button onClick={e => count.set(0)}>Reset</button>
+        <button onClick={() => count.update(c => c + 1)}>+</button>
+        <button onClick={() => count.update(c => c - 1)}>-</button>
+        <button onClick={() => count.set(0)}>Reset</button>
     </div>
 )
 
 export const AbstractTemperatureCounter = withState(0,count =>
     <div>
         <div style={{color: `rgb(${255-count.get()}, 0, ${count.get()})`}}><b>{count.get()}</b></div>
-        <button onclick={e => count.update(c => c + 30)}>+</button>
-        <button onClick={e => count.update(c => c - 30)}>-</button>
-        <button onClick={e => count.set(0)}>Reset</button>
+        <button onClick={() => count.update(c => c + 30)}>+</button>
+        <button onClick={() => count.update(c => c - 30)}>-</button>
+        <button onClick={() => count.set(0)}>Reset</button>
     </div>
 )
 
@@ -119,14 +119,14 @@ export const AbstractTodo = withState(initialTodoState, state =>
                                checked={state.bind(
                                    s => s.items.find(j => j === t).isDone,
                                    (s, v) => s.mutate(prev => prev.items.find(j => j === t).isDone = v))} />
-                        {t.task}
+                        <span style={t.isDone ? 'text-decoration: line-through' : ''}>{t.task}</span>
                     </label>
                 </div>)
         }
         {state.get().items.length === 0 ? <div>No Tasks</div> : ''}
         <div>
             <input value={state.bind(s => s.newTask)} placeholder="New Item" />
-            <button onclick={e => state.mutate(s => {
+            <button onClick={e => state.mutate(s => {
                 s.items.push({task: s.newTask, isDone: false, id: s.items.length + 1})
                 s.newTask = ''
             })}>Add New</button>
@@ -165,6 +165,6 @@ export const SamplesPage = <div>
     <h3>Editor</h3>
     <AbstractEditor />
 
-    {/*<h3>Todo</h3>
-    {AbstractTodo}*/}
+    <h3>Todo</h3>
+    {AbstractTodo}
 </div>

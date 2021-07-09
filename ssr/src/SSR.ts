@@ -176,9 +176,7 @@ class SSRState<T = any> extends AbstractWritableState<T> {
     subscribe(subscriber: any): StateSubscription { return '' }
     unsubscribe(s: StateSubscription) { }
     mutate(reducer: (prev: T) => void): void { }
-    bind(expr: ((state: T) => any) | undefined, setter: ((state: AbstractWritableState<T>, newValue: any) => void) | undefined): ValueBinding<T> {
-        return new ValueBinding(this, expr, setter)
-    }
+
     set(newVal: T): void { }
     update(reducer: (prev: T) => T): void { }
 
@@ -186,6 +184,10 @@ class SSRState<T = any> extends AbstractWritableState<T> {
         super();
         this.$$basedOn = initialValue
         this.$$id = ++stateCount
+    }
+
+    bind<TVal>(expr: ((state: T) => TVal) | undefined, setter: ((state: AbstractWritableState<T>, newValue: TVal) => void) | undefined): ValueBinding<T, TVal> {
+        return new ValueBinding(this, expr, setter)
     }
 }
 

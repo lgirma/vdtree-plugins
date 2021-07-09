@@ -1,6 +1,6 @@
 {
   "name": "vdtree-dom",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Render vdtree components to the browser DOM without any framework.",
   "module": "dist/vdtree-dom.es.js",
   "main": "dist/vdtree-dom.umd.js",
@@ -22,12 +22,12 @@
     "mocha": "^8.4.0",
     "ts-mocha": "^8.0.0",
     "typescript": "^4.3.2",
-    "vdtree-examples": "^0.3.0",
+    "vdtree-examples": "^0.4.0",
     "vite": "^2.4.0"
   },
   "peerDependencies": {
     "morphdom": "^2.6.1",
-    "vdtree": "^0.8.0"
+    "vdtree": "^0.9.0"
   },
   "author": "Leone",
   "repository": "https://github.com/lgirma/vdtree-plugins",

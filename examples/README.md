@@ -7,3 +7,5 @@ To install
 ```shell
 npm i vdtree-examples
 ```
+
+You will find the examples in `src/components.jsx` file.
